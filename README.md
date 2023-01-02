@@ -8,8 +8,8 @@ Hardware revision targets are defined in `/targets/revXX.cmake`, starting from r
 
 | Revision   | Target   | MCU        |
 | ---------- | -------- | ---------- |
-| 3.0        | `rev30`  | ATMEGA32U4 |
 | 3.1        | `rev31`  | ATMEGA32U4 |
+| 3.0        | `rev30`  | ATMEGA32U4 |
 
 ### Rev 3.1 Hardware (latest)
 
