@@ -21,10 +21,22 @@ Hardware revision targets are defined in `/targets/revXX.cmake`, starting from r
 | Gas Gauge  | MAX17048G         |
 | IMU        | MMA8652           |
 
+### Rev 3.0 Hardware
+
+| Function   | Part              |
+| ---------- | ----------------- |
+| MCU        | ATMEGA32U4        |
+| USB-Serial | None              |
+| EEPROM     | CAT24C128 (128KB) |
+| Gas Gauge  | MAX17048G         |
+| IMU        | MMA8652           |
+
 ## Initial Setup
 
 Modify `env_setup.sh`
+
 Change `TARGET`, `PORT` as appropriate
+
 Then:
 
 ```
