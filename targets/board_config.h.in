@@ -1,12 +1,12 @@
 #ifndef CONFIG_HEADER
 #define CONFIG_HEADER
 
-// general
+/* general */
 #define HW_REV ${HW_REV}
 #define MCU ${MCU}
 #define F_CPU ${F_CPU}
 
-// peripherals
+/* peripherals */
 #define I2C_FREQ ${I2C_FREQ}
 #define IMU_TYPE ${IMU_TYPE}
 #define EEPROM_TYPE ${EEPROM_TYPE}

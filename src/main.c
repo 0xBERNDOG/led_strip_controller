@@ -1,47 +1,46 @@
 #include "board_config.h"
-#include "io/i2c.h"
+#include "eeprom/eeprom.h"
 #include "io/blinky.h"
 
-#include <avr/interrupt.h>
-#include <stdbool.h>
 #include <stdint.h>
 #include <util/delay.h>
 
-uint8_t read_from_eeprom();
-
-// todo: remove/move into eeprom files
-#define EEPROM_ADDR 0x50
-
 int main(void) {
     blinky_init();
+    eeprom_init();
 
-    // Enable Global interrupts
-    sei();
+    const uint16_t addr = 5;
+    uint8_t data_write[] = {0x10, 0x30, 0x70, 0xAA, 0xFF};
+    const uint8_t num_write_bytes = sizeof(data_write) / sizeof(uint8_t);
+    size_t result_write = eeprom_write_bytes(addr, data_write, num_write_bytes);
 
-    i2c_init(I2C_FREQ);
-    uint8_t data[] = {0x00, 0x00, 0x15};  // first 2 bytes are memory address
-    i2c_write(EEPROM_ADDR, data, 3, true);
-
-    // flash blinky to show that we're doing something
-    blinky_off();
-    uint8_t i;
-    for (i = 0; i < 5; i++) {
-        blinky_toggle();
-        _delay_ms(50);
+    if (result_write != num_write_bytes) {
+        // something went wrong
+        while (1) {
+            blinky_toggle();
+            _delay_ms(100);
+        }
     }
-    blinky_off();
 
-    uint8_t duty_cycle = read_from_eeprom();
-    while (1) {
-        blinky_pwm(duty_cycle);
+    const uint8_t num_read_bytes = num_write_bytes;
+    uint8_t read_data[num_read_bytes];
+    size_t result_read = eeprom_read_bytes(addr, read_data, num_read_bytes);
+
+    if (result_read != num_read_bytes) {
+        // something went wrong
+        while (1) {
+            blinky_toggle();
+            _delay_ms(500);
+        }
+    } else {
+        while (1) {
+            for (size_t i = 0; i < num_read_bytes; i++) {
+                const uint8_t duty_cycle = read_data[i];
+
+                for (size_t j = 0; j < 500; j++) {
+                    blinky_pwm(duty_cycle);
+                }
+            }
+        }
     }
-}
-
-uint8_t read_from_eeprom() {
-    uint8_t memory_address[] = {0x00, 0x00};
-    uint8_t data[1];
-    i2c_write(EEPROM_ADDR, memory_address, 2, false);
-    i2c_read(EEPROM_ADDR, data, 1, true);
-
-    return data[0];
 }

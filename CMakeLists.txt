@@ -18,7 +18,7 @@ set(SRC_FILES
 
     # io
     src/${MCU_LOWERCASE}/i2c.c
-    src/targets/${TARGET}/gpio.c
+#    src/targets/${TARGET}/gpio.c   # todo: uncomment when implemented
     src/targets/${TARGET}/blinky.c
 
     # peripherals
@@ -37,8 +37,9 @@ target_include_directories(${PROJECT_NAME}
 )
 
 # compiler/linker flags
-target_compile_options(${PROJECT_NAME} PRIVATE -g -Wall -mcall-prologues -mmcu=${MCU_LOWERCASE} -Os)
+target_compile_options(${PROJECT_NAME} PRIVATE -g -Wall -Wextra -std=c99 -pedantic-errors -mcall-prologues -mmcu=${MCU_LOWERCASE} -Os)
 target_link_options(${PROJECT_NAME} PRIVATE -Wl,-gc-sections -Wl,-relax -mmcu=${MCU_LOWERCASE} -Os)
 
 add_custom_target(hex ALL avr-objcopy -R .eeprom -O ihex ${CMAKE_BINARY_DIR}/${PROJECT_NAME}.elf ${CMAKE_BINARY_DIR}/${PROJECT_NAME}.hex)
 add_custom_target(upload sudo avrdude  -c ${PROGRAMMER} -P $ENV{PORT} -p ${MCU_LOWERCASE} -U flash:w:${PROJECT_NAME}.hex:i DEPENDS hex)
+add_custom_target(memory_usage avr-size -C --mcu=${MCU_LOWERCASE} ${CMAKE_BINARY_DIR}/${PROJECT_NAME}.elf DEPENDS hex)

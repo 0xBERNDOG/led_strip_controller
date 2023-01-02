@@ -30,7 +30,16 @@ static volatile i2c_result i2c_current_result;
 static volatile bool i2c_send_stop;
 static volatile bool i2c_in_repeated_start;
 
-void i2c_init(const uint32_t i2c_freq) {
+void i2c_init() {
+    static bool init = false;
+    if (init) {
+        // already initialised
+        return;
+    }
+
+    // enable interrupts
+    sei();
+
     // initialise internal state
     i2c_current_state = READY;
     i2c_send_stop = false;
@@ -39,14 +48,16 @@ void i2c_init(const uint32_t i2c_freq) {
     // set prescaler (1x) and bitrate
     TWSR &= ~(1 << TWPS0);
     TWSR &= ~(1 << TWPS1);
-    TWBR = (F_CPU / (8 * i2c_freq)) - 2;
+    TWBR = (F_CPU / (8 * I2C_FREQ)) - 2;
 
     // enable I2C, interrupts, and acks
     TWCR = (1 << TWEN) | (1 << TWIE) | (1 << TWEA);
+
+    init = true;
 }
 
 i2c_result i2c_write(const uint8_t address, uint8_t const *buffer,
-                     uint8_t num_bytes, bool send_stop) {
+                     const size_t num_bytes, const bool send_stop) {
     if (num_bytes > I2C_BUFFER_LENGTH) {
         return FAILURE;
     }
@@ -61,9 +72,12 @@ i2c_result i2c_write(const uint8_t address, uint8_t const *buffer,
     i2c_buffer_index = 0;
     i2c_buffer_length = num_bytes;
 
-    uint8_t i;
-    for (i = 0; i < num_bytes; i++) {
-        i2c_buffer[i] = buffer[i];
+    if (buffer != NULL) {
+        // buffer is allowed to be NULL when data is being thrown away (e.g.
+        // when sending a signal to a device)
+        for (size_t i = 0; i < num_bytes; i++) {
+            i2c_buffer[i] = buffer[i];
+        }
     }
 
     i2c_slawr = TW_WRITE | (address << 1);
@@ -83,8 +97,8 @@ i2c_result i2c_write(const uint8_t address, uint8_t const *buffer,
     return i2c_current_result;
 }
 
-i2c_result i2c_read(const uint8_t address, uint8_t *buffer, uint8_t num_bytes,
-                    bool send_stop) {
+i2c_result i2c_read(const uint8_t address, uint8_t *buffer,
+                    const size_t num_bytes, const bool send_stop) {
     if (num_bytes > I2C_BUFFER_LENGTH) {
         return FAILURE;
     }
@@ -113,13 +127,18 @@ i2c_result i2c_read(const uint8_t address, uint8_t *buffer, uint8_t num_bytes,
         continue;
     }
 
+    size_t num_bytes_read = num_bytes;
     if (i2c_buffer_index < num_bytes) {
-        num_bytes = i2c_buffer_index;
+        num_bytes_read = i2c_buffer_index;
     }
 
-    uint8_t i;
-    for (i = 0; i < num_bytes; i++) {
-        buffer[i] = i2c_buffer[i];
+    if (buffer != NULL) {
+        // buffer is allowed to be NULL when data is being thrown away (e.g.
+        // when sending a signal to a device)
+        size_t i;
+        for (i = 0; i < num_bytes_read; i++) {
+            buffer[i] = i2c_buffer[i];
+        }
     }
 
     return i2c_current_result;
@@ -148,7 +167,7 @@ ISR(TWI_vect) {
                 } else {
                     i2c_in_repeated_start = true;
                     i2c_current_state = READY;
-                    i2c_current_state = SUCCESS;
+                    i2c_current_result = SUCCESS;
                     I2C_SEND_START_NO_INT();
                 }
             }

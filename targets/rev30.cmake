@@ -5,18 +5,7 @@ set(PROGRAMMER stk500v2)
 set(F_CPU 8000000UL)
 
 # peripherals
-set(I2C_FREQ 75000)
+set(I2C_FREQ 100000)
 set(IMU_TYPE MMA8652)
 set(EEPROM_TYPE CAT24C128)
 set(GASGAUGE_TYPE MAX17048G)
-
-#// I2C
-#define I2C_FREQ 75000
-#define IMU_ADDR 0x1D
-#define EEPROM_ADDR 0x50
-#define GG_ADDR 0x6C
-
-#// blinky
-#define BLINKY_MODE_PORT DDRD
-#define BLINKY_PORT PORTD
-#define BLINKY_PIN 7
