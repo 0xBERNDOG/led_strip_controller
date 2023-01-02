@@ -13,11 +13,13 @@ Hardware revision targets are defined in `/targets/revXX.cmake`, starting from r
 
 ### Rev 3.1 Hardware (latest)
 
-| MCU | ATMEGA32U4 |
-| USB-Serial | CP1202N (28 pin) |
-| EEPROM | CAT24C128 (128KB) |
-| Gas Gauge | MAX17048G |
-| IMU | MMA8652 |
+| Function   | Part              |
+| ---------- | ----------------- |
+| MCU        | ATMEGA32U4        |
+| USB-Serial | CP1202N (28 pin)  |
+| EEPROM     | CAT24C128 (128KB) |
+| Gas Gauge  | MAX17048G         |
+| IMU        | MMA8652           |
 
 ## Initial Setup
 
