@@ -22,6 +22,8 @@ source env_setup.sh
 
 ## Build and Upload
 
+I use the [Pololu USB AVR Programmer v2.1](https://www.pololu.com/product/3172). You may need to modify the build pipeline as appropriate for your set of tools.
+
 ```
 ./build.sh
 ./flash.sh
