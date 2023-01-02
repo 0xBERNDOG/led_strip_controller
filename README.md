@@ -1,5 +1,7 @@
 # LED Strip Controller (Firmware)
 
+This is the firmware for my addressable LED strip controller project. The aim is to control a strip of WS2812Bs with a set of pre-loaded animations.
+
 [Development journal](https://projects.stevenburnett.co.uk/led_controller/)
 
 ## Hardware
