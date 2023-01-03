@@ -1,10 +1,12 @@
 # LED Strip Controller (Firmware)
 
-<p align="center">
+<div align="center">
+
 ![Build status](https://img.shields.io/github/actions/workflow/status/texruska/led_strip_controller/build.yml?style=flat-square)
 ![Firmware version](https://img.shields.io/badge/fw%20version-pre--alpha-blue?style=flat-square)
 ![Hardware revision](https://img.shields.io/badge/hw%20revision-3.1-red?style=flat-square)
-</p>
+
+</div>
 
 This is the firmware for my addressable LED strip controller project. The aim is to control a strip of WS2812Bs with a set of pre-loaded animations.
 
