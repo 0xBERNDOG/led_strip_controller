@@ -1,0 +1,15 @@
+name: Run default build script
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install build requirements
+        run: apt install cmake avrdude gcc-avr avr-libc
+      
+      - name: Run build script
+        run: (source ./env_setup.sh && ./build.sh) || exit 1
