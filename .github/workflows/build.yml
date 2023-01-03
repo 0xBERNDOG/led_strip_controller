@@ -1,4 +1,4 @@
-name: Run default build script
+name: Build
 on: [push]
 jobs:
   build:
