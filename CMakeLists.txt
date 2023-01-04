@@ -18,7 +18,8 @@ set(SRC_FILES
 
     # io
     src/${MCU_LOWERCASE}/i2c.c
-    src/targets/${TARGET}/gpio.c
+#    src/targets/${TARGET}/gpio.c
+    src/${MCU_LOWERCASE}/gpio/gpio.c
     src/io/blinky.c
 
     # peripherals
@@ -34,6 +35,8 @@ target_include_directories(${PROJECT_NAME}
     PUBLIC
         src
         ${CMAKE_BINARY_DIR}
+        src/${MCU_LOWERCASE}
+        src/targets/${TARGET}
 )
 
 # compiler/linker flags
