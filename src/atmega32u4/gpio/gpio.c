@@ -53,6 +53,6 @@ bool gpio_read_pin(const GPIO_pin pin) {
         return false;
     }
 
-    return (*pin_internals.port_in & (1 << *pin_internals.port_in)) ==
-           (1 << *pin_internals.port_in);
+    return (*pin_internals.port_in & (1 << pin_internals.pin)) ==
+           (1 << pin_internals.pin);
 }

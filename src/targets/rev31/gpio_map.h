@@ -12,29 +12,29 @@ const GPIO_pin_internals gpio_pins[GPIO_NUM_STATES] = {
     [GPIO_LED_BLINKY] = {.data_dir = &DDRD,
                          .port_in = &PIND,
                          .port_out = &PORTD,
-                         .pin = 6},
+                         .pin = PD6},
     [GPIO_LED_STRIP] = {.data_dir = &DDRB,
                         .port_in = &PINB,
                         .port_out = &PORTB,
-                        .pin = 6},
+                        .pin = PB6},
 
     // buttons
     [GPIO_BUTTON_BRIGHTNESS] = {.data_dir = &DDRB,
                                 .port_in = &PINB,
                                 .port_out = &PORTB,
-                                .pin = 0},
+                                .pin = PB0},
     [GPIO_BUTTON_ANIMATION] = {.data_dir = &DDRB,
                                .port_in = &PINB,
                                .port_out = &PORTB,
-                               .pin = 4},
-    [GPIO_BUTTON_MODE] = {.data_dir = &DDR7,
-                          .port_in = &PIN7,
-                          .port_out = &PORT7,
-                          .pin = 7},
+                               .pin = PB4},
+    [GPIO_BUTTON_MODE] = {.data_dir = &DDRD,
+                          .port_in = &PIND,
+                          .port_out = &PORTD,
+                          .pin = PD7},
 
     // interrupts
     [GPIO_INT_IMU] = {
-        .data_dir = &DDRB, .port_in = &PINB, .port_out = &PORTB, .pin = 5}};
+        .data_dir = &DDRB, .port_in = &PINB, .port_out = &PORTB, .pin = PB5}};
 
 GPIO_pin_internals gpio_get_pin(const GPIO_pin pin) { return gpio_pins[pin]; }
 
