@@ -18,8 +18,8 @@ set(SRC_FILES
 
     # io
     src/${MCU_LOWERCASE}/i2c.c
-#    src/targets/${TARGET}/gpio.c   # todo: uncomment when implemented
-    src/targets/${TARGET}/blinky.c
+    src/targets/${TARGET}/gpio.c
+    src/io/blinky.c
 
     # peripherals
     src/eeprom/${EEPROM_TYPE_LOWERCASE}.c
