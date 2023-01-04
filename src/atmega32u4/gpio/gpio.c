@@ -1,6 +1,6 @@
 #include "io/gpio.h"
 #include "atmega32u4/gpio/pin.h"
-#include "gpio/mapping.h"
+#include "gpio_map.h"
 
 #include <stddef.h>
 #include <stdint.h>
