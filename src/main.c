@@ -5,6 +5,11 @@
 
 int main(void) {
     blinky_init();
+    /*
+        while (1) {
+            blinky_toggle();
+            _delay_ms(250);
+        }*/
 
     gpio_setup_pin(GPIO_BUTTON_ANIMATION, GPIO_PIN_INPUT);
     gpio_setup_pin(GPIO_BUTTON_BRIGHTNESS, GPIO_PIN_INPUT);
