@@ -4,7 +4,7 @@
 
 [![Build status](https://img.shields.io/github/actions/workflow/status/texruska/led_strip_controller/build.yml?style=flat-square)](https://github.com/texruska/led_strip_controller/actions)
 [![Firmware version](https://img.shields.io/badge/fw%20version-pre--alpha-blue?style=flat-square)](https://github.com/texruska/led_strip_controller/releases)
-[![Hardware revision](https://img.shields.io/badge/hw%20revision-4.0%20(%20not%20yet%20built)-red?style=flat-square)](https://projects.stevenburnett.co.uk/led_controller/)
+[![Hardware revision](https://img.shields.io/badge/hw%20revision-4.0%20(not%20yet%20built)-red?style=flat-square)](https://projects.stevenburnett.co.uk/led_controller/)
 
 </div>
 
