@@ -18,7 +18,7 @@ The hardware for this project is about to undergo a significant rework, and so t
 
 ### Phases
 
-- [x] Exploratory work (nrf52dk)
+- [x] Exploratory work (nRF52 DK)
 - [ ] Schematic
 - [ ] PCB design
 - [ ] Firmware development
