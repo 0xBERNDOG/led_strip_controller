@@ -14,4 +14,11 @@ This is the firmware for my addressable LED strip controller project. The aim is
 
 ## Coming Soon
 
-The hardware for this project is about to undergo a significant rework, and so the firmware will be changing too.
+The hardware for this project is about to undergo a significant rework, and so the firmware will be changing too. Work on the `3.x` branch has been abandoned.
+
+### Phases
+
+- [x] Exploratory work (nrf52dk)
+- [ ] Schematic
+- [ ] PCB design
+- [ ] Firmware development
