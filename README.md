@@ -22,3 +22,13 @@ The hardware for this project is about to undergo a significant rework, and so t
 - [ ] Schematic
 - [ ] PCB design
 - [ ] Firmware development
+
+### Planned Features
+
+* LED strip control (WS2812B)
+* Bluetooth control
+* One-button physical interface
+* Appears as USB mass storage for easy animation uploading
+    - USB-C
+* Li-ion battery charging and monitoring (designed for 18650s)
+* Additional software tool for easy animation creation
